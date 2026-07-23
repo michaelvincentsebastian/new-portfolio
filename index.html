@@ -77,60 +77,16 @@
       <h2 class="reveal">Proyek <span class="accent">Saya</span></h2>
       <p class="section-desc reveal">Pilihan proyek yang pernah saya bangun, dari data pipeline hingga sistem cerdas.</p>
 
-      <div class="project-grid">
-
-        <article class="project-card reveal">
-          <div class="project-card__cover">
-            <img src="assets/images/projects/futuramap-cover.jpg" alt="Tampilan dashboard FuturaMap" loading="lazy" />
-            <span class="status-badge status-badge--done">Completed</span>
-          </div>
-          <div class="project-card__body">
-            <h3>FuturaMap</h3>
-            <p>
-              Platform "Data as a Product" berbasis arsitektur Data Lakehouse untuk membantu siswa
-              memetakan kesiapan kuliah — dilengkapi analisis gap nilai SNBT, rekomendasi kursus
-              berbasis AI, dan sistem alert otomatis ke Guru BK.
-            </p>
-            <ul class="project-card__tags">
-              <li>DuckDB</li><li>PostgreSQL</li><li>MinIO</li><li>SQLMesh</li><li>Ollama</li>
-            </ul>
-            <div class="project-card__links">
-              <a href="#" class="text-link" data-placeholder="github">Lihat Repo →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="project-card reveal">
-          <div class="project-card__cover project-card__cover--gradient">
-            <span class="status-badge status-badge--progress">In Progress</span>
-          </div>
-          <div class="project-card__body">
-            <h3>Automated Prospecting Engine</h3>
-            <p>
-              Solusi otomasi cerdas berbasis n8n untuk merevolusi proses manajemen prospek
-              penjualan — mengatasi inefisiensi tim Sales dalam menyortir data mentah lewat sistem
-              kualifikasi &amp; segmentasi otomatis berbasis AI.
-            </p>
-            <ul class="project-card__tags">
-              <li>n8n</li><li>Docker</li><li>AI Agent</li><li>PostgreSQL</li>
-            </ul>
-            <div class="project-card__links">
-              <a href="#" class="text-link" data-placeholder="github">Lihat Repo →</a>
-            </div>
-          </div>
-        </article>
-
-        <!--
-          ==========================================================
-          CARA MENAMBAH PROJECT BARU:
-          1. Copy 1 blok <article class="project-card reveal">...</article> di atas
-          2. Ganti gambar, judul, deskripsi, tags, dan link
-          3. Kalau project masih berjalan, pakai class "status-badge--progress"
-             kalau sudah selesai pakai "status-badge--done"
-          4. Simpan file ini, done — tidak perlu install/build apapun.
-          ==========================================================
-        -->
-
+      <!--
+        ==========================================================
+        CARA MENAMBAH PROJECT BARU (tidak perlu edit file ini sama sekali):
+        1. Buat file baru di content/projects/nama-project.md
+        2. Tambahkan nama file itu ke content/projects/manifest.json
+        3. Commit & push — selesai. Lihat README.md untuk contoh lengkap.
+        ==========================================================
+      -->
+      <div class="project-grid" id="projectsGrid">
+        <p style="color:var(--text-muted)">Memuat proyek...</p>
       </div>
     </div>
   </section>
@@ -235,15 +191,15 @@
       <form id="contactForm" class="contact-form reveal" action="/api/contact" method="POST">
         <!--
           ==========================================================
-          SETUP WEB3FORMS (WAJIB SEBELUM FORM BISA KIRIM EMAIL):
-          1. Buka https://web3forms.com dan daftar pakai email kamu (gratis)
-          2. Kamu akan dapat "Access Key"
-          3. Access key TIDAK ditaruh di sini lagi. Simpan sebagai Environment
-             Variable bernama WEB3FORMS_ACCESS_KEY di dashboard Vercel
-             (Project → Settings → Environment Variables).
-          4. Form ini akan mengirim ke /api/contact (lihat api/contact.js),
-             baru dari situ diteruskan ke Web3Forms dengan key yang tersimpan
-             aman di server, tidak pernah terlihat oleh pengunjung.
+          SETUP DISCORD WEBHOOK (WAJIB SEBELUM FORM BISA KIRIM PESAN):
+          1. Di server Discord kamu: Server Settings → Integrations → Webhooks
+             → New Webhook → pilih channel tujuan → Copy Webhook URL
+          2. Simpan URL itu sebagai Environment Variable di dashboard Vercel:
+             Name: DISCORD_WEBHOOK_URL
+             Value: (paste URL webhook dari Discord)
+          3. Redeploy project di Vercel supaya env var terbaca
+          4. Form ini kirim ke /api/contact (lihat api/contact.js), baru dari
+             situ diteruskan ke Discord dengan format embed yang rapi.
           ==========================================================
         -->
         <input type="checkbox" name="botcheck" class="honeypot" style="display:none">
@@ -271,5 +227,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/projects.js"></script>
 </body>
 </html>

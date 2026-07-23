@@ -66,6 +66,7 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.15 }
 );
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+window.__revealObserver = revealObserver; // dipakai oleh js/projects.js untuk card yang di-render belakangan
 
 // =========================================================
 // 5. FOOTER YEAR

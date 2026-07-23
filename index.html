@@ -232,19 +232,20 @@
         </div>
       </div>
 
-      <form id="contactForm" class="contact-form reveal" action="https://api.web3forms.com/submit" method="POST">
+      <form id="contactForm" class="contact-form reveal" action="/api/contact" method="POST">
         <!--
           ==========================================================
           SETUP WEB3FORMS (WAJIB SEBELUM FORM BISA KIRIM EMAIL):
           1. Buka https://web3forms.com dan daftar pakai email kamu (gratis)
           2. Kamu akan dapat "Access Key"
-          3. Ganti nilai value="YOUR_ACCESS_KEY_HERE" di bawah dengan key itu
-          4. Selesai — form akan mengirim pesan langsung ke email kamu,
-             tanpa perlu server/backend sama sekali.
+          3. Access key TIDAK ditaruh di sini lagi. Simpan sebagai Environment
+             Variable bernama WEB3FORMS_ACCESS_KEY di dashboard Vercel
+             (Project → Settings → Environment Variables).
+          4. Form ini akan mengirim ke /api/contact (lihat api/contact.js),
+             baru dari situ diteruskan ke Web3Forms dengan key yang tersimpan
+             aman di server, tidak pernah terlihat oleh pengunjung.
           ==========================================================
         -->
-        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-        <input type="hidden" name="subject" value="Pesan baru dari Portfolio">
         <input type="checkbox" name="botcheck" class="honeypot" style="display:none">
 
         <label for="name">Nama</label>

@@ -82,24 +82,23 @@ const formStatus = document.getElementById("formStatus");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const accessKey = form.querySelector('[name="access_key"]').value;
-  if (!accessKey || accessKey === "YOUR_ACCESS_KEY_HERE") {
-    formStatus.textContent =
-      "Form belum aktif — tambahkan Access Key Web3Forms kamu dulu di index.html (lihat README.md).";
-    formStatus.className = "form-status error";
-    return;
-  }
-
   submitBtn.disabled = true;
   submitBtn.textContent = "Mengirim...";
   formStatus.textContent = "";
   formStatus.className = "form-status";
 
+  const payload = {
+    name: form.querySelector('[name="name"]').value,
+    email: form.querySelector('[name="email"]').value,
+    message: form.querySelector('[name="message"]').value,
+    botcheck: form.querySelector('[name="botcheck"]').checked,
+  };
+
   try {
     const res = await fetch(form.action, {
       method: "POST",
-      body: new FormData(form),
-      headers: { Accept: "application/json" },
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     });
     const data = await res.json();
 

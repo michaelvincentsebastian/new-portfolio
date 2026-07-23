@@ -25,20 +25,27 @@ portfolio-simple/
 
 Setelah edit, langsung bisa dites dengan buka `index.html` di browser (double click), tidak butuh server.
 
-## 2. Setup form kontak (Web3Forms — gratis, tanpa backend)
+## 2. Setup form kontak (Web3Forms, key disimpan aman di Vercel)
 
-Form kontak butuh "Access Key" supaya bisa mengirim pesan ke email kamu.
+Form kontak butuh "Access Key" supaya bisa mengirim pesan ke email kamu. Key ini **tidak** ditaruh
+di `index.html` — sengaja disimpan di server (lewat `api/contact.js`) supaya tidak terlihat oleh
+pengunjung web.
 
-1. Buka **https://web3forms.com**
-2. Masukkan email kamu di halaman utama → klik **Create Access Key**
-3. Cek email kamu, salin Access Key yang dikirim
-4. Buka `index.html`, cari baris ini (di bagian `<section id="contact">`):
-   ```html
-   <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
-   ```
-5. Ganti `YOUR_ACCESS_KEY_HERE` dengan Access Key kamu, save.
+1. Buka **https://web3forms.com**, masukkan email kamu → klik **Create Access Key**
+2. Cek email kamu, salin Access Key yang dikirim
+3. **Setelah** project di-deploy ke Vercel (lihat bagian 3 di bawah):
+   - Buka dashboard project kamu di Vercel
+   - Masuk ke **Settings → Environment Variables**
+   - Tambahkan variable baru:
+     - Name: `WEB3FORMS_ACCESS_KEY`
+     - Value: (paste Access Key dari Web3Forms)
+   - Klik **Save**
+4. Buka tab **Deployments** → klik titik tiga (⋯) di deployment terakhir → **Redeploy**
+   (supaya env var yang baru ditambahkan ikut terbaca)
 
-Selesai — pesan dari form akan langsung masuk ke email kamu, tanpa perlu server/database sama sekali.
+Selesai — pesan dari form akan diproses lewat `/api/contact` (serverless function di folder `api/`),
+baru diteruskan ke Web3Forms dengan key yang aman di server. Tidak ada database, tidak ada server
+yang perlu kamu kelola sendiri — Vercel yang menjalankan fungsi ini otomatis saat ada submit.
 
 > Catatan keamanan: nomor telepon sudah dihapus dari web ini. Orang yang mau menghubungi kamu
 > wajib lewat form ini atau media sosial yang kamu cantumkan.
@@ -92,7 +99,7 @@ Kalau kamu punya domain sendiri (misalnya `michaelvincent.dev`):
 |---|---|
 | Next.js + TypeScript, per-halaman (home/techstack/dst terpisah) | 1 halaman HTML, scroll ke bawah, nav jadi anchor link |
 | Data project: object TypeScript ~600 baris, dual-bahasa | 1 blok HTML per project, langsung terlihat & gampang diduplikasi |
-| Contact form → API route custom → Discord webhook | Form → Web3Forms langsung, tanpa server/backend |
+| Contact form → API route custom → Discord webhook | Form → 1 serverless function kecil (`api/contact.js`) → Web3Forms, access key aman di Environment Variable |
 | Nomor telepon ditampilkan publik | Dihapus. Kontak hanya lewat form & sosial media |
 | Perlu `npm install`, build, deploy config | Tinggal buka file & edit, tidak ada proses build |
 

@@ -1,0 +1,50 @@
+---
+import { t } from "../../data/i18n.js";
+const { lang } = Astro.props;
+const home = t(lang).home;
+---
+
+<section id="home" class="scroll-mt-24 flex min-h-[80vh] flex-col justify-center">
+  <div class="w-full max-w-6xl">
+    <div class="animate-fade-up">
+      <p class="text-4xl font-bold text-foreground md:text-5xl lg:text-6xl">{home.greeting}</p>
+      <h1 class="text-4xl font-bold text-accent md:text-5xl lg:text-6xl text-balance">{home.name}</h1>
+    </div>
+
+    <p class="animate-fade-up delay-1 mt-2 inline-block rounded-full bg-accent/10 border border-accent/20 px-4 py-1.5 text-sm font-medium text-accent">
+      {home.position}
+    </p>
+
+    <p class="animate-fade-up delay-2 mt-6 max-w-lg text-base leading-relaxed text-muted-foreground text-pretty">
+      {home.description}
+    </p>
+
+    <div class="animate-fade-up delay-3 mt-8 flex flex-wrap gap-4">
+      <a
+        href="/resume.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-transform duration-200 hover:scale-105 hover:shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+      >
+        {home.resumeBtn}
+      </a>
+      <a
+        href="#contact"
+        class="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+      >
+        {home.contactBtn}
+      </a>
+    </div>
+
+    <div class="animate-fade-up delay-4 mt-16">
+      <h3 class="mb-4 text-xs font-bold tracking-[0.2em] text-muted-foreground">{home.whatILikeTitle}</h3>
+      <div class="flex flex-wrap gap-3">
+        {home.tags.map((tag) => (
+          <span class="cursor-default rounded-lg border border-border bg-card px-4 py-2 text-sm text-muted-foreground transition-colors duration-200 hover:bg-accent hover:text-accent-foreground hover:border-accent">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

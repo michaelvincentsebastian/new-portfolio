@@ -1,0 +1,43 @@
+---
+import Sidebar from "../components/Sidebar.astro";
+import "../styles/global.css";
+import { siteConfig } from "../data/site.js";
+
+const {
+  lang,
+  title,
+  description = siteConfig.siteDescription,
+  altHref,
+  isProjectPage = false,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title ? `${title} — ${siteConfig.name}` : siteConfig.siteTitle}</title>
+    <meta name="description" content={description} />
+
+    <!--
+      Script ini HARUS inline dan HARUS di <head>, supaya tema gelap/terang
+      diterapkan SEBELUM halaman digambar (mencegah "kedipan" putih sesaat).
+    -->
+    <script is:inline>
+      const storedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      if (storedTheme === "dark" || (!storedTheme && prefersDark)) {
+        document.documentElement.classList.add("dark");
+      }
+    </script>
+  </head>
+  <body class="min-h-screen bg-background text-foreground">
+    <Sidebar lang={lang} altHref={altHref} isProjectPage={isProjectPage} />
+
+    <main class="mx-auto max-w-6xl px-6 pb-28 pt-16 md:pl-28 md:pr-8 md:pb-16">
+      <slot />
+    </main>
+  </body>
+</html>

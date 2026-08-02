@@ -1,0 +1,42 @@
+---
+import Icon from "./Icon.astro";
+import { t } from "../data/i18n.js";
+
+const { project, lang } = Astro.props;
+const { title, tagline, year, status, techStack, cover } = project.data;
+const label = t(lang).projects;
+---
+
+<a
+  href={`/${lang}/projects/${project.data.projectSlug}`}
+  class="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-accent/50 hover:-translate-y-1"
+>
+  {cover && (
+    <div class="aspect-video w-full overflow-hidden bg-muted">
+      <img
+        src={cover}
+        alt={title}
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <div class="flex flex-1 flex-col p-6">
+    <div class="flex items-center justify-between gap-2">
+      <h3 class="text-lg font-bold text-foreground">{title}</h3>
+      <span class="shrink-0 text-xs font-medium text-muted-foreground">{year}</span>
+    </div>
+    <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{tagline}</p>
+    <div class="mt-4 flex flex-wrap gap-2">
+      {techStack.slice(0, 4).map((tech) => (
+        <span class="rounded-md border border-border bg-muted px-2 py-1 text-[11px] font-medium text-muted-foreground">
+          {tech}
+        </span>
+      ))}
+    </div>
+    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
+      {label.viewProject}
+      <Icon name="external-link" size={14} />
+    </span>
+  </div>
+</a>

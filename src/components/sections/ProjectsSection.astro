@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content";
+import { t } from "../../data/i18n.js";
+import ProjectCard from "../ProjectCard.astro";
+
+const { lang } = Astro.props;
+const projectsText = t(lang).projects;
+
+const allProjects = await getCollection("projects");
+const projects = allProjects
+  .filter((p) => p.data.lang === lang)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<section id="projects" class="scroll-mt-24 py-20">
+  <div class="animate-fade-up">
+    <h2 class="text-4xl font-bold text-foreground md:text-5xl text-balance">
+      {projectsText.title} <span class="text-accent">{projectsText.titleAccent}</span>
+    </h2>
+    <p class="mt-4 max-w-xl text-base leading-relaxed text-muted-foreground text-pretty">
+      {projectsText.description}
+    </p>
+  </div>
+
+  <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+    {projects.map((project) => (
+      <ProjectCard project={project} lang={lang} />
+    ))}
+  </div>
+</section>

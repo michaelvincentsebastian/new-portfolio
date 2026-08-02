@@ -1,149 +1,197 @@
-# Portfolio — Michael Vincent Sebastian (versi sederhana)
+# Portfolio — Vincent (Astro Edition)
 
-Versi rebuild dari portfolio lama (Next.js + TypeScript) menjadi **HTML + CSS + JavaScript murni**.
-Tidak ada `npm install`, tidak ada build step, tidak ada error compile. Edit file → save → upload.
+Rebuild dari portfolio Next.js + TypeScript lama, dengan stack yang jauh lebih
+sederhana: **Astro + Tailwind CSS**, hampir tanpa TypeScript, dan struktur
+file yang rapi/tidak tersebar.
 
-## Struktur file
+Situs ini **1 halaman scroll** (Home → Tech Stack → Projects → Experience →
+Contact) dengan navigasi jump-link, ditambah halaman detail terpisah untuk
+tiap project (`/projects/nama-project`). Tersedia dalam 2 bahasa: English
+(`/en/`, default) dan Indonesia (`/id/`).
+
+---
+
+## 1. Menjalankan di komputer sendiri
+
+Butuh [Node.js](https://nodejs.org) versi 22 ke atas.
+
+```bash
+npm install
+npm run dev
+```
+
+Buka `http://localhost:4321` di browser. Setiap perubahan file otomatis ter-refresh.
+
+Perintah lain:
+
+```bash
+npm run build     # build versi production ke folder dist/
+npm run preview   # coba jalankan hasil build secara lokal
+```
+
+---
+
+## 2. Struktur folder (di mana harus edit apa)
 
 ```
-portfolio-simple/
-├── index.html                    <- kerangka halaman (1 halaman, 4 section)
-├── css/style.css                  <- semua warna & tampilan
-├── js/main.js                      <- animasi, dark/light toggle, kirim form kontak
-├── js/projects.js                   <- baca & render project dari content/projects
-├── api/contact.js                    <- serverless function: forward pesan ke Discord
-├── content/projects/*.md              <- 1 file = 1 project (INI YANG DIEDIT KALAU ADA PROJECT BARU)
-├── content/projects/manifest.json      <- daftar urutan file project yang ditampilkan
-├── assets/images/                       <- gambar project & ikon
-├── package.json
-└── README.md
+src/
+├── content/projects/     ← 👉 TAMBAH/EDIT PROJECT DI SINI (file Markdown)
+├── data/
+│   ├── i18n.js            ← semua teks situs (EN & ID), termasuk timeline
+│   │                         pengalaman, info kontak, nomor telepon, dst
+│   ├── techstack.js        ← daftar tools/teknologi yang tampil di section
+│   │                         Tech Stack
+│   └── site.js             ← nama, link sosial media
+├── components/            ← blok-blok UI (sidebar, kartu project, ikon)
+├── components/sections/   ← 5 section homepage (Home, TechStack, dst)
+├── layouts/BaseLayout.astro
+├── pages/
+│   ├── en/index.astro      ← halaman utama versi English
+│   ├── id/index.astro      ← halaman utama versi Indonesia
+│   └── [lang]/projects/[slug].astro  ← template halaman detail project
+│                                        (1 file dipakai untuk semua project,
+│                                        kedua bahasa)
+└── content.config.ts      ← ⚠️ satu-satunya file "TypeScript". Isinya cuma
+                               definisi skema data project. Jangan diedit
+                               kecuali mau menambah field baru.
+public/
+├── images/                ← gambar/screenshot project & logo tech stack
+└── resume.pdf             ← 👉 GANTI DENGAN RESUME ASLI ANDA
 ```
 
-## 1. Cara nambah/update project (tanpa sentuh HTML/CSS/JS)
+**Poin penting:** kecuali `content.config.ts`, Anda tidak akan menulis kode
+TypeScript sama sekali untuk pekerjaan sehari-hari (nambah project, ganti
+teks, ganti warna). Semua file `.astro` isinya HTML + sedikit JavaScript
+biasa.
 
-Buka folder `content/projects/`. Tiap project itu 1 file `.md`, formatnya begini:
+---
+
+## 3. Cara menambah project baru
+
+Ini bagian yang dulu paling bikin malas update — sekarang tinggal bikin 1
+file Markdown baru per bahasa di `src/content/projects/`.
+
+1. Duplikat salah satu file yang sudah ada, misalnya `futuramap.en.md`
+2. Ganti nama file, contoh: `chatbot-project.en.md`
+3. Isi bagian atas (frontmatter) di antara `---`:
 
 ```markdown
 ---
-title: Nama Project
-status: done
-tags: Python, Docker, PostgreSQL
-image: assets/images/projects/nama-file.jpg
-repo: https://github.com/username/repo
+title: "Nama Project"
+tagline: "Satu kalimat singkat tentang project ini"
+projectSlug: "chatbot-project"   # dipakai di URL: /projects/chatbot-project
+lang: "en"                        # "en" atau "id"
+year: "2026"
+status: "Completed"               # Completed | In Progress | Archived
+techStack: ["Python", "n8n"]
+cover: "/images/projects/cover.jpg"   # opsional, taruh gambarnya di public/images/projects/
+github: "https://github.com/..."      # opsional
+demo: "https://..."                    # opsional
+order: 3                          # urutan tampil, angka kecil di atas
 ---
-Deskripsi project kamu di sini, boleh 1-3 kalimat.
+
+## Overview
+Tulis penjelasan project di sini, bebas pakai Markdown biasa
+(bisa **bold**, list, dst).
+
+## The Problem
+...
+
+## How It Works
+1. Langkah pertama
+2. Langkah kedua
+
+## Results
+...
 ```
 
-Keterangan tiap field:
-- `status`: isi `done` kalau sudah selesai, atau `progress` kalau masih berjalan (badge di card berubah otomatis)
-- `image`: kosongkan saja (`image:`) kalau belum ada gambar — card akan pakai background gradient
-- `repo`: kosongkan saja (`repo:`) kalau belum ada link — tombol "Lihat Repo" otomatis hilang
+4. Buat juga versi bahasa satunya (`chatbot-project.id.md`) dengan
+   `projectSlug` **yang sama persis**, supaya tombol ganti bahasa di halaman
+   detail bisa saling terhubung. Kalau belum sempat menerjemahkan, boleh
+   sementara isi versi ID dengan teks yang sama dulu.
+5. Simpan file. Project baru otomatis muncul di homepage dan punya halaman
+   detail sendiri — tidak perlu sentuh kode apa pun yang lain.
 
-**Langkah nambah project baru:**
-1. Bikin file baru, misalnya `content/projects/project-baru.md`, isi seperti format di atas
-2. Buka `content/projects/manifest.json`, tambahkan nama file itu ke dalam array:
-   ```json
-   ["futuramap.md", "prospecting-engine.md", "project-baru.md"]
+Judul section Markdown (`## Overview`, `## The Problem`, dst) bebas Anda
+sesuaikan sendiri, tidak harus persis seperti contoh.
+
+---
+
+## 4. Cara ganti Resume
+
+1. Siapkan file PDF resume Anda
+2. Beri nama file **`resume.pdf`**
+3. Timpa file `public/resume.pdf` yang ada (isinya sekarang cuma placeholder)
+4. Selesai — tombol "Download Resume" otomatis membuka file yang baru
+
+---
+
+## 5. Cara edit teks, warna, dan pengalaman kerja
+
+- **Teks apa pun di situs** (nama, deskripsi, label tombol, timeline
+  pengalaman, nomor telepon, alamat): edit `src/data/i18n.js`. Cari teksnya
+  (biasanya gampang ditemukan lewat Ctrl+F di editor Anda), ganti nilainya,
+  simpan.
+- **Daftar tech stack** (logo dan nama tools yang tampil di section Tech
+  Stack): edit `src/data/techstack.js`.
+- **Link media sosial**: edit `src/data/site.js`.
+- **Warna tema** (aksen cyan, dsb): edit variabel CSS di
+  `src/styles/global.css`, bagian `:root` (mode terang) dan `.dark` (mode
+  gelap).
+
+---
+
+## 6. Setup form kontak (Web3Forms)
+
+Form kontak memakai [Web3Forms](https://web3forms.com) — layanan gratis
+yang mengirim isi form ke email Anda **tanpa perlu bikin backend/API route
+sendiri**.
+
+1. Buka https://web3forms.com, masukkan email Anda, dan dapatkan **Access
+   Key** gratis (dikirim ke email, prosesnya instan)
+2. Duplikat file `.env.example` di root project, ganti namanya jadi `.env`
+3. Isi:
    ```
-3. Commit & push ke GitHub — selesai. Card baru otomatis muncul di web, urutannya sesuai urutan di manifest.json.
+   PUBLIC_WEB3FORMS_KEY=isi-dengan-access-key-anda
+   ```
+4. Jalankan ulang `npm run dev` — form kontak sekarang aktif mengirim email
 
-Tidak perlu install apapun, tidak perlu edit `index.html`, `css`, atau `js` sama sekali.
+Saat deploy ke Vercel, environment variable ini perlu didaftarkan juga di
+dashboard Vercel (caranya ada di bagian 7 di bawah).
 
-### Update konten lain
+---
 
-- **Ganti teks di luar project** (nama, intro, skill, dll) → buka `index.html`, cari teksnya, ganti, save.
-- **Ganti warna tema** → buka `css/style.css`, baris paling atas ada `:root { --accent: #06b6d4; ... }`.
+## 7. Deploy ke Vercel
 
-### Catatan soal tes di komputer sendiri
+1. Push project ini ke repository GitHub baru (bisa timpa/replace repo lama,
+   atau bikin repo baru — terserah Anda)
+2. Buka [vercel.com](https://vercel.com) → **Add New Project** → pilih repo
+   tersebut
+3. Vercel otomatis mendeteksi ini project Astro, tidak perlu ubah pengaturan
+   build apa pun (defaultnya sudah benar: build command `astro build`,
+   output directory `dist`)
+4. Sebelum klik Deploy, buka bagian **Environment Variables**, tambahkan:
+   - `PUBLIC_WEB3FORMS_KEY` → isi dengan access key dari langkah sebelumnya
+5. Klik **Deploy**, tunggu selesai, situs langsung live
 
-Karena `js/projects.js` mengambil file markdown lewat `fetch()`, membuka `index.html` dengan cara
-**double-click langsung** tidak akan berhasil menampilkan project (browser memblokir `fetch` ke file
-lokal karena alasan keamanan). Kalau mau tes dulu sebelum push, jalankan server lokal sederhana,
-misalnya (butuh Node.js terpasang):
-```
-npx serve .
-```
-lalu buka alamat yang muncul di terminal (biasanya `http://localhost:3000`). Atau, cara paling
-gampang: push saja ke GitHub, Vercel otomatis membuat **Preview Deployment** dengan URL sendiri
-setiap kali kamu push — tes langsung di situ.
+Setiap kali Anda `git push` perubahan baru (misalnya nambah project lewat
+file Markdown), Vercel otomatis build ulang dan deploy versi terbaru — sama
+seperti workflow lama Anda.
 
-## 2. Setup form kontak (Discord Webhook, URL disimpan aman di Vercel)
+---
 
-Form kontak meneruskan pesan ke channel Discord kamu lewat Webhook. URL webhook **tidak** ditaruh
-di `index.html` — disimpan di server (lewat `api/contact.js`) supaya tidak terlihat pengunjung.
+## 8. Apa yang berubah dari versi lama
 
-1. Buka server Discord kamu → klik channel tujuan → **Edit Channel → Integrations → Webhooks → New Webhook**
-2. Beri nama (misalnya "Portfolio Notification"), klik **Copy Webhook URL**
-3. **Setelah** project di-deploy ke Vercel (lihat bagian 3 di bawah):
-   - Buka dashboard project kamu di Vercel
-   - Masuk ke **Settings → Environment Variables**
-   - Tambahkan variable baru:
-     - Name: `DISCORD_WEBHOOK_URL`
-     - Value: (paste URL webhook dari Discord)
-   - Klik **Save**
-4. Buka tab **Deployments** → klik titik tiga (⋯) di deployment terakhir → **Redeploy**
-   (supaya env var yang baru ditambahkan ikut terbaca)
-
-Selesai — pesan dari form diproses lewat `/api/contact`, lalu dikirim ke Discord dalam format embed
-rapi (nama, email, waktu WIB, isi pesan). Tidak ada database, tidak ada server yang perlu kamu kelola —
-Vercel yang menjalankan fungsi ini otomatis tiap ada submit.
-
-> Catatan keamanan: nomor telepon sudah dihapus dari web ini. Orang yang mau menghubungi kamu
-> wajib lewat form ini atau media sosial yang kamu cantumkan.
-
-## 3. Deploy ke Vercel (sampai bisa diakses publik)
-
-Kamu tidak perlu install Node.js atau CLI apapun. Cukup akun GitHub + Vercel.
-
-### Langkah A — Upload ke GitHub
-
-1. Buka https://github.com → login
-2. Klik **New repository** → beri nama misalnya `portfolio` → **Create repository**
-3. Di halaman repo kosong itu, klik **uploading an existing file**
-4. Drag semua isi folder `portfolio-simple` (index.html, css/, js/, assets/, README.md) ke halaman itu
-5. Scroll ke bawah, klik **Commit changes**
-
-*(Alternatif kalau kamu sudah biasa pakai Git di terminal: `git init`, `git add .`, `git commit -m "init"`, lalu push ke repo baru itu.)*
-
-### Langkah B — Hubungkan ke Vercel
-
-1. Buka https://vercel.com → login/signup pakai akun GitHub kamu (biar otomatis terhubung)
-2. Di dashboard Vercel, klik **Add New... → Project**
-3. Pilih repo `portfolio` yang tadi kamu upload → klik **Import**
-4. Di halaman konfigurasi:
-   - **Framework Preset**: pilih `Other` (karena ini HTML statis biasa, bukan Next.js/React)
-   - **Build Command**: kosongkan
-   - **Output Directory**: kosongkan / biarkan default
-5. Klik **Deploy**
-
-Tunggu ~30 detik, Vercel akan kasih tahu "Congratulations!" dengan link seperti
-`https://portfolio-xxxx.vercel.app` — itu sudah bisa diakses siapa saja di internet.
-
-### Langkah C — Update portfolio di kemudian hari
-
-Setiap kali kamu mau update (misalnya nambah project baru progress):
-1. Edit file di komputer kamu (`index.html`, dll)
-2. Upload ulang / commit & push perubahan itu ke repo GitHub yang sama
-   (bisa lewat halaman GitHub langsung: buka file → klik ikon pensil → edit → **Commit changes**)
-3. Vercel otomatis mendeteksi perubahan dan re-deploy dalam hitungan detik — tidak perlu setting ulang apapun.
-
-### (Opsional) Custom domain
-
-Kalau kamu punya domain sendiri (misalnya `michaelvincent.dev`):
-1. Di dashboard project Vercel → tab **Settings → Domains**
-2. Masukkan domain kamu, ikuti instruksi untuk mengubah DNS record di penyedia domain kamu
-3. Tunggu propagasi DNS (biasanya beberapa menit sampai 1 jam)
-
-## 4. Apa yang berubah dari versi lama
-
-| Sebelumnya | Sekarang |
+| Versi Lama (Next.js + TS) | Versi Baru (Astro) |
 |---|---|
-| Next.js + TypeScript, per-halaman (home/techstack/dst terpisah) | 1 halaman HTML, scroll ke bawah, nav jadi anchor link |
-| Data project: object TypeScript ~600 baris, dual-bahasa | 1 file Markdown per project di `content/projects/`, tinggal tambah file + 1 baris di manifest.json |
-| Contact form → API route custom TypeScript → Discord webhook | Form → serverless function plain JS (`api/contact.js`) → Discord webhook, logic sama, webhook URL aman di Environment Variable |
-| Nomor telepon ditampilkan publik | Dihapus. Kontak hanya lewat form & sosial media |
-| Perlu `npm install`, build, deploy config | Tinggal buka file & edit, tidak ada proses build |
+| Data project: 1 file TypeScript ~600 baris, nested types dalam-dalam | Data project: 1 file Markdown per project/bahasa, isinya teks biasa |
+| Navigasi antar "section" via state React (bukan URL asli) | 1 halaman scroll dengan jump-link asli (`#projects`, dst) — bisa di-bookmark/di-share |
+| Detail project: bagian dari state yang sama | Halaman terpisah asli: `/en/projects/nama-project` |
+| Kontak: API route custom + kirim email server-side | Form langsung ke Web3Forms, tanpa server sendiri |
+| Animasi: Framer Motion (stagger, spring, dst) | CSS animation sederhana (fade-up), tetap halus tanpa JS berat |
+| Wajib paham TypeScript untuk update sehari-hari | Update sehari-hari = edit file Markdown/JS biasa. TypeScript cuma ada di 1 file setup yang jarang disentuh |
 
-Section "Experience/Journey" dari versi lama sengaja tidak disertakan di sini karena tidak masuk
-dalam 4 alur utama yang kamu minta (Home → Projects → Skills → Contact). Kalau nanti mau
-ditambahkan kembali (misalnya sebagai sub-bagian di dalam "Home"), tinggal bilang saja.
+Beberapa hal yang **tidak dipertahankan** karena butuh library berat yang
+justru menambah kerumitan (sesuai kesepakatan): partikel background custom,
+animasi stagger/spring ala Framer Motion, dan API route contact-form custom
+(diganti Web3Forms yang lebih simpel).

@@ -12,7 +12,8 @@ export const translations = {
   en: {
     nav: {
       home: "Home",
-      techStack: "Tech Stack",
+      about: "About",
+      techStack: "Skills",
       projects: "Projects",
       experience: "Experience",
       contact: "Contact",
@@ -20,11 +21,14 @@ export const translations = {
     home: {
       greeting: "Hi,",
       name: "I'm Vincent",
-      position: "Data Engineer Intern @ PT. Data Andalan Utama",
+      position: "Analytics Engineer @ PT. Data Andalan Utama",
       description:
-        "Passionate Data Engineer dedicated to turning raw, messy data into high-performance pipelines and actionable insights. I bridge the gap between complex data infrastructure and strategic decision-making, ensuring data is not just stored, but empowered to drive business growth.",
+        "Passionate <strong>Analytics Engineer</strong> focused on transforming business requirements into scalable analytics solutions. I design and build end-to-end data platforms—from understanding business domains and engineering lakehouse architectures to developing reliable data pipelines, business-ready datasets, APIs, and analytics applications that enable data-driven decision-making.",
       resumeBtn: "Download Resume",
       contactBtn: "Contact Me",
+      locationLabel: "Semarang, Indonesia",
+      locationTitle: "Current Location",
+      locationDetail: "Semarang, Central Java, Indonesia",
       whatILikeTitle: "Tagline",
       tags: [
         "Data Architecture",
@@ -36,21 +40,34 @@ export const translations = {
         "On-Premises",
       ],
     },
-    techStack: {
-      title: "Tech Stack",
-      titleAccent: "& Tools",
+    about: {
+      title: "About",
+      titleAccent: "Me",
+      tabLabels: ["Who I Am", "Current Role", "Goal & Focus"],
+      paragraphs: [
+        "Hi! I'm Michael Vincent Sebastian Handojo, a Computer Science student at BINUS Online with a strong interest in Data and Artificial Intelligence. I believe that valuable data is more than just collected—it should be transformed into solutions that solve business problems and support informed decision-making.",
+        "As an Analytics Engineer Intern, I design and develop end-to-end analytics solutions, from understanding business requirements and application domains to designing data storage architectures, building data pipelines, transforming business data, and delivering dashboards and analytics applications.",
+        "I am passionate about exploring modern data technologies, particularly lakehouse architectures, data platforms, and AI-driven analytics. My goal is to build intelligent, scalable, and impactful data solutions by combining data engineering, analytics, and artificial intelligence."
+      ],
+    },
+    skills: {
+      title: "Skills",
       description:
-        "The choice of technology and tools that I use to build robust data pipelines and elegant systems",
+        "The terminology and tools that I use and have experience in to build an end-to-end data pipeline.",
       categories: {
-        programmingLanguages: "PROGRAMMING LANGUAGES",
-        dataStorage: "DATA STORAGE",
-        dataOrchestration: "DATA ORCHESTRATION",
-        dataTransformation: "DATA TRANSFORMATION",
-        dataIngestion: "DATA INGESTION",
-        cloudPlatforms: "CLOUD PLATFORMS",
-        dataVisualization: "DATA VISUALIZATION",
-        professionalTools: "PROFESSIONAL TOOLS",
+        programmingLanguages: "Programming Language",
+        framework: "Framework",
+        databases: "Databases",
+        objectStorage: "Object Storage",
+        orchestration: "Orchestration",
+        cloudPlatforms: "Cloud Platform",
+        dataOps: "DataOps",
+        businessIntelligence: "Business Inteligence",
+        professionalTools: "Professional Tools",
       },
+    },
+    get techStack() {
+      return this.skills;
     },
     projects: {
       title: "My",
@@ -143,6 +160,7 @@ export const translations = {
   id: {
     nav: {
       home: "Beranda",
+      about: "Tentang",
       techStack: "Tech Stack",
       projects: "Proyek",
       experience: "Pengalaman",
@@ -151,11 +169,14 @@ export const translations = {
     home: {
       greeting: "Hai,",
       name: "Saya Vincent",
-      position: "Data Engineer Intern @ PT. Data Andalan Utama",
+      position: "Analytics Engineer @ PT. Data Andalan Utama",
       description:
-        "Data Engineer yang berdedikasi mengubah data mentah dan berantakan menjadi pipeline berkinerja tinggi dan wawasan yang dapat ditindaklanjuti. Saya menjembatani kesenjangan antara infrastruktur data yang kompleks dan pengambilan keputusan strategis, memastikan data tidak hanya disimpan, tetapi diberdayakan untuk mendorong pertumbuhan bisnis.",
+        "Seorang <strong>Analytics Engineer</strong> yang berfokus pada transformasi kebutuhan bisnis menjadi solusi analitik yang skalabel. Berpengalaman merancang dan membangun platform data end-to-end, mulai dari memahami domain bisnis, membangun arsitektur lakehouse, mengembangkan data pipeline yang andal, memodelkan dataset yang siap digunakan untuk kebutuhan bisnis, hingga menyediakan API dan aplikasi analitik yang mendukung pengambilan keputusan berbasis data.",
       resumeBtn: "Unduh Resume",
       contactBtn: "Hubungi Saya",
+      locationLabel: "Semarang, Indonesia",
+      locationTitle: "Lokasi Saat Ini",
+      locationDetail: "Semarang, Jawa Tengah, Indonesia",
       whatILikeTitle: "Tagline",
       tags: [
         "Arsitektur Data",
@@ -167,21 +188,34 @@ export const translations = {
         "On-Premises",
       ],
     },
-    techStack: {
-      title: "Tech Stack",
-      titleAccent: "& Tools",
+    about: {
+      title: "Tentang",
+      titleAccent: "Saya",
+      tabLabels: ["Tentang Saya", "Peran Saat Ini", "Fokus & Tujuan"],
+      paragraphs: [
+        "Hi! Saya Michael Vincent Sebastian Handojo, merupakan mahasiswa BINUS Online Program Studi Teknik Informatika yang memiliki minat pada bidang Data dan Artificial Intelligence. Saya percaya bahwa data yang bernilai bukan hanya sekadar dikumpulkan, tetapi juga diolah menjadi solusi yang mampu menjawab kebutuhan bisnis dan mendukung pengambilan keputusan.",
+        "Saat ini saya memiliki pengalaman sebagai Analytics Engineer Intern, dengan tanggung jawab merancang dan membangun solusi analitik secara end-to-end. Mulai dari memahami kebutuhan bisnis dan domain aplikasi, merancang arsitektur penyimpanan, membangun data pipeline, melakukan transformasi data berbasis logika bisnis, hingga mengembangkan dashboard dan aplikasi analitik yang dapat digunakan oleh pengguna.",
+        "Saya senang mempelajari teknologi baru, terutama yang berkaitan dengan modern data platform, lakehouse architecture, data engineering, serta penerapan Artificial Intelligence dalam ekosistem data. Ke depan, saya ingin mengembangkan solusi yang menggabungkan data engineering, analytics, dan AI untuk menghasilkan sistem yang lebih cerdas, efisien, dan memberikan dampak nyata bagi organisasi."
+      ],
+    },
+    skills: {
+      title: "Skills",
       description:
-        "Pilihan teknologi dan alat yang saya gunakan untuk membangun pipeline data yang tangguh dan sistem yang elegan",
+        "Terminologi dan alat yang saya gunakan serta saya kuasai untuk membangun pipeline data dari ujung ke ujung.",
       categories: {
-        programmingLanguages: "BAHASA PEMROGRAMAN",
-        dataStorage: "PENYIMPANAN DATA",
-        dataOrchestration: "ORKESTRASI DATA",
-        dataTransformation: "TRANSFORMASI DATA",
-        dataIngestion: "INGESTI DATA",
-        cloudPlatforms: "PLATFORM CLOUD",
-        dataVisualization: "VISUALISASI DATA",
-        professionalTools: "ALAT PROFESIONAL",
+        programmingLanguages: "Programming Language",
+        framework: "Framework",
+        databases: "Databases",
+        objectStorage: "Object Storage",
+        orchestration: "Orchestration",
+        cloudPlatforms: "Cloud Platform",
+        dataOps: "DataOps",
+        businessIntelligence: "Business Inteligence",
+        professionalTools: "Professional Tools",
       },
+    },
+    get techStack() {
+      return this.skills;
     },
     projects: {
       title: "Proyek",

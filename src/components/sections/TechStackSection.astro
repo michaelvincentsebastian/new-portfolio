@@ -29,11 +29,6 @@ const categoryNames = techStack.categories;
         <div class="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
           {category.items.map((item) => (
             <div class="group relative flex flex-col items-center gap-3 rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:border-accent/50 hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-              {item.soon && (
-                <span class="absolute -top-2 -right-2 rounded-full bg-accent/20 px-2 py-0.5 text-[10px] font-bold text-accent border border-accent/30">
-                  Soon
-                </span>
-              )}
               <div class="flex h-12 w-12 items-center justify-center">
                 <img
                   src={item.icon}

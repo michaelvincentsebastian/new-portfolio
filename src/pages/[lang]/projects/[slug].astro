@@ -87,13 +87,131 @@ const altHref = sameProjectOtherLang
     )}
   </header>
 
+  <!-- Cover Image container (used in tabs script) -->
   {project.data.cover && (
-    <div class="animate-fade-up mt-10 overflow-hidden rounded-2xl border border-border">
+    <div id="project-cover-container" class="animate-fade-up mt-10 overflow-hidden rounded-2xl border border-border">
       <img src={project.data.cover} alt={title} class="w-full object-cover" />
     </div>
   )}
 
   <div class="markdown-content animate-fade-up mt-10 max-w-3xl">
-    <Content />
+    <!-- Tab navigation structure -->
+    <div id="project-tabs-container" class="hidden">
+      <div class="flex border-b border-border/60 gap-1 md:gap-3 mb-8 overflow-x-auto pb-px">
+        <button
+          class="project-tab-btn border-b-2 border-accent text-accent px-4 py-3 text-sm font-semibold cursor-pointer whitespace-nowrap transition-colors"
+          data-project-tab="general"
+        >
+          {label.tabGeneral}
+        </button>
+        <button
+          class="project-tab-btn border-b-2 border-transparent text-muted-foreground hover:text-foreground px-4 py-3 text-sm font-semibold cursor-pointer whitespace-nowrap transition-colors"
+          data-project-tab="technical"
+        >
+          {label.tabTechnical}
+        </button>
+        <button
+          class="project-tab-btn border-b-2 border-transparent text-muted-foreground hover:text-foreground px-4 py-3 text-sm font-semibold cursor-pointer whitespace-nowrap transition-colors"
+          data-project-tab="result"
+        >
+          {label.tabResult}
+        </button>
+      </div>
+
+      <!-- Tab panels container -->
+      <div id="project-tab-content-general" class="project-tab-panel block animate-fade-in"></div>
+      <div id="project-tab-content-technical" class="project-tab-panel hidden animate-fade-in"></div>
+      <div id="project-tab-content-result" class="project-tab-panel hidden animate-fade-in"></div>
+    </div>
+
+    <div id="raw-markdown-content">
+      <Content />
+    </div>
   </div>
+
+  <script is:inline>
+    (() => {
+      const rawContent = document.getElementById("raw-markdown-content");
+      const tabsContainer = document.getElementById("project-tabs-container");
+      const panelGeneral = document.getElementById("project-tab-content-general");
+      const panelTechnical = document.getElementById("project-tab-content-technical");
+      const panelResult = document.getElementById("project-tab-content-result");
+      const coverContainer = document.getElementById("project-cover-container");
+
+      if (!rawContent || !tabsContainer || !panelGeneral || !panelTechnical || !panelResult) return;
+
+      const children = Array.from(rawContent.children);
+      let currentTab = "general";
+      let hasTabs = false;
+
+      children.forEach((child) => {
+        const text = child.textContent.trim().toLowerCase();
+        if (child.tagName === "H2" && (text === "general" || text === "umum")) {
+          currentTab = "general";
+          hasTabs = true;
+          child.remove();
+        } else if (child.tagName === "H2" && (text === "technical" || text === "teknis")) {
+          currentTab = "technical";
+          hasTabs = true;
+          child.remove();
+        } else if (child.tagName === "H2" && (text === "result" || text === "hasil")) {
+          currentTab = "result";
+          hasTabs = true;
+          child.remove();
+        } else {
+          if (currentTab === "general") {
+            panelGeneral.appendChild(child);
+          } else if (currentTab === "technical") {
+            panelTechnical.appendChild(child);
+          } else if (currentTab === "result") {
+            panelResult.appendChild(child);
+          }
+        }
+      });
+
+      if (hasTabs) {
+        rawContent.remove();
+        tabsContainer.classList.remove("hidden");
+
+        // Move the cover image to the top of the Result tab
+        if (coverContainer && panelResult) {
+          coverContainer.classList.remove("mt-10");
+          coverContainer.classList.add("mb-6");
+          panelResult.insertBefore(coverContainer, panelResult.firstChild);
+        }
+
+        const tabBtns = document.querySelectorAll(".project-tab-btn");
+        const panels = {
+          general: panelGeneral,
+          technical: panelTechnical,
+          result: panelResult,
+        };
+
+        tabBtns.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const tabName = btn.getAttribute("data-project-tab");
+
+            // Update active styles on buttons
+            tabBtns.forEach((b) => {
+              b.classList.remove("border-accent", "text-accent");
+              b.classList.add("border-transparent", "text-muted-foreground");
+            });
+            btn.classList.add("border-accent", "text-accent");
+            btn.classList.remove("border-transparent", "text-muted-foreground");
+
+            // Show active panel
+            Object.keys(panels).forEach((key) => {
+              if (key === tabName) {
+                panels[key].classList.remove("hidden");
+                panels[key].classList.add("block");
+              } else {
+                panels[key].classList.add("hidden");
+                panels[key].classList.remove("block");
+              }
+            });
+          });
+        });
+      }
+    })();
+  </script>
 </BaseLayout>

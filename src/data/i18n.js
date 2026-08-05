@@ -16,6 +16,7 @@ export const translations = {
       techStack: "Skills",
       projects: "Projects",
       experience: "Experience",
+      journey: "Journey",
       contact: "Contact",
     },
     home: {
@@ -83,50 +84,61 @@ export const translations = {
       techStackLabel: "Tech Stack",
       links: "Links",
       viewOnGithub: "View on GitHub",
+      tabGeneral: "General",
+      tabTechnical: "Technical",
+      tabResult: "Result",
       liveDemo: "Live Demo",
     },
-    experience: {
+    journey: {
       title: "My",
       titleAccent: "Journey",
       description: "A timeline of my educational and professional milestones",
+      timelineTitle: "Experience",
       items: [
         {
-          date: "Jul 2023",
-          title: "Enrolled at SMK Nusaputera 1 Semarang",
-          description:
-            "Started my vocational high school journey in Computer Network and Telecommunication Engineering",
+          id: "smk_nusaputera",
+          date: "Jul 2023 - May 2026",
+          title: "TKJ - SMK Nusaputera 1 Semarang",
+          description: "Computer Network and Telecommunication Engineering student",
         },
         {
-          date: "Oct 2024",
+          id: "osis_president",
+          date: "Oct 2024 - Sept 2025",
           title: "Student Council President",
-          description:
-            "Elected as President of the Student Council at SMK Nusaputera 1 Semarang (Oct 2024 - Sept 2025)",
+          description: "Elected as President of the Student Council at SMK Nusaputera 1 Semarang",
         },
         {
-          date: "Oct 2024",
-          title: "3rd Place - GESIT Binus University",
-          description:
-            "Won 3rd place in the Ideation category at GESIT event held by Binus University @Semarang",
-        },
-        {
-          date: "Dec 2024",
-          title: "Gold Medal - KSAN Informatics",
-          description:
-            "Achieved a Gold Medal in the National Science Competition (KSAN) for Informatics",
-        },
-        {
-          date: "Oct 2025",
-          title: "Samsung Solve for Tomorrow - Semifinalist",
-          description:
-            "Reached the semifinal round in the Samsung Solve for Tomorrow competition",
-        },
-        {
+          id: "internship_analytics",
           date: "Nov 2025 - Present",
-          title: "Data Engineer Intern",
-          description:
-            "Currently interning as a Data Engineer at PT. Data Andalan Utama",
+          title: "Analytics Engineer Intern",
+          description: "PT. Data Andalan Utama",
+        },
+        {
+          id: "binus_online",
+          date: "Aug 2026 - Jul 2030",
+          title: "Computer Science - BINUS Online",
+          description: "Undergraduate student majoring in Computer Science",
         },
       ],
+      awardsTitle: "Awards &",
+      awardsTitleAccent: "Medals",
+      awards: [
+        {
+          title: "Juara 3 - GESIT Binus University",
+          description: "Ideation category at GESIT event by Binus University @Semarang",
+        },
+        {
+          title: "Medali Emas - KSAN Informatics",
+          description: "Gold Medal in the National Science Competition (KSAN) for Informatics",
+        },
+        {
+          title: "Samsung Solve for Tomorrow - Semifinalis",
+          description: "Semifinalist in Samsung Solve for Tomorrow national competition",
+        },
+      ],
+    },
+    get experience() {
+      return this.journey;
     },
     contact: {
       title: "Keep in",
@@ -164,6 +176,7 @@ export const translations = {
       techStack: "Tech Stack",
       projects: "Proyek",
       experience: "Pengalaman",
+      journey: "Perjalanan",
       contact: "Kontak",
     },
     home: {
@@ -230,45 +243,61 @@ export const translations = {
       techStackLabel: "Tech Stack",
       links: "Tautan",
       viewOnGithub: "Lihat di GitHub",
+      tabGeneral: "Umum",
+      tabTechnical: "Teknis",
+      tabResult: "Hasil",
       liveDemo: "Live Demo",
     },
-    experience: {
+    journey: {
       title: "Perjalanan",
       titleAccent: "Saya",
       description: "Timeline pencapaian pendidikan dan profesional saya",
+      timelineTitle: "Pengalaman",
       items: [
         {
-          date: "Jul 2023",
-          title: "Masuk SMK Nusaputera 1 Semarang",
-          description:
-            "Memulai perjalanan SMK di bidang Teknik Komputer dan Jaringan Telekomunikasi",
+          id: "smk_nusaputera",
+          date: "Jul 2023 - Mei 2026",
+          title: "TKJ - SMK Nusaputera 1 Semarang",
+          description: "Siswa Teknik Komputer Jaringan & Telekomunikasi",
         },
         {
-          date: "Okt 2024",
+          id: "osis_president",
+          date: "Okt 2024 - Sept 2025",
           title: "Ketua OSIS",
-          description: "Terpilih sebagai Ketua OSIS SMK Nusaputera 1 Semarang (Okt 2024 - Sept 2025)",
+          description: "Terpilih sebagai Ketua OSIS SMK Nusaputera 1 Semarang",
         },
         {
-          date: "Okt 2024",
-          title: "Juara 3 - GESIT Binus University",
-          description: "Meraih Juara 3 kategori Ideation di acara GESIT Binus University @Semarang",
-        },
-        {
-          date: "Des 2024",
-          title: "Medali Emas - KSAN Informatika",
-          description: "Meraih Medali Emas di Kompetisi Sains Nasional (KSAN) bidang Informatika",
-        },
-        {
-          date: "Okt 2025",
-          title: "Samsung Solve for Tomorrow - Semifinalis",
-          description: "Mencapai babak semifinal kompetisi Samsung Solve for Tomorrow",
-        },
-        {
+          id: "internship_analytics",
           date: "Nov 2025 - Sekarang",
-          title: "Data Engineer Intern",
-          description: "Saat ini magang sebagai Data Engineer di PT. Data Andalan Utama",
+          title: "Magang Analytics Engineer",
+          description: "PT. Data Andalan Utama",
+        },
+        {
+          id: "binus_online",
+          date: "Agu 2026 - Jul 2030",
+          title: "Teknik Informatika - BINUS Online",
+          description: "Mahasiswa program kelas online di Universitas Bina Nusantara",
         },
       ],
+      awardsTitle: "Penghargaan &",
+      awardsTitleAccent: "Medali",
+      awards: [
+        {
+          title: "Juara 3 - GESIT Binus University",
+          description: "Ideation category di acara GESIT Binus University @Semarang",
+        },
+        {
+          title: "Medali Emas - KSAN Informatika",
+          description: "Medali Emas di Kompetisi Sains Nasional (KSAN) bidang Informatika",
+        },
+        {
+          title: "Samsung Solve for Tomorrow - Semifinalis",
+          description: "Semifinalis kompetisi nasional Samsung Solve for Tomorrow",
+        },
+      ],
+    },
+    get experience() {
+      return this.journey;
     },
     contact: {
       title: "Tetap",

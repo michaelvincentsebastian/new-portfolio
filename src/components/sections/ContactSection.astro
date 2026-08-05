@@ -18,7 +18,7 @@ const contact = t(lang).contact;
   </div>
 
   <div class="mt-12 max-w-4xl mx-auto animate-fade-up">
-    <div class="rounded-2xl border border-border bg-card p-6 md:p-8">
+    <div class="rounded-xl border border-border/80 bg-card/50 p-6 md:p-8">
       <h3 class="text-lg font-bold text-foreground">{contact.sendMessage}</h3>
 
       <!--
@@ -38,7 +38,7 @@ const contact = t(lang).contact;
               name="email"
               required
               placeholder={contact.emailPlaceholder}
-              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-accent"
+              class="w-full rounded border border-border/80 bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-accent"
             />
           </div>
           <div class="flex-1">
@@ -48,7 +48,7 @@ const contact = t(lang).contact;
               name="subject"
               required
               placeholder={contact.subjectPlaceholder}
-              class="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-accent"
+              class="w-full rounded border border-border/80 bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-accent"
             />
           </div>
         </div>
@@ -60,14 +60,14 @@ const contact = t(lang).contact;
             required
             rows="5"
             placeholder={contact.messagePlaceholder}
-            class="w-full resize-none rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-accent"
+            class="w-full resize-none rounded border border-border/80 bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors focus:border-accent"
           ></textarea>
         </div>
 
         <button
           type="submit"
           id="contact-submit-btn"
-          class="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-transform hover:scale-[1.02] disabled:opacity-60 disabled:hover:scale-100 cursor-pointer"
+          class="inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-all hover:scale-[1.01] disabled:opacity-60 disabled:hover:scale-100 cursor-pointer"
         >
           {contact.sendBtn}
         </button>

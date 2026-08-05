@@ -1,37 +1,43 @@
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,500,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #f8fafc;
+  --background: #F8FBFF;
   --foreground: #0f172a;
   --card: #ffffff;
   --card-foreground: #0f172a;
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
   --border: #e2e8f0;
-  --accent: #06b6d4;
+  --accent: #2563eb;
   --accent-foreground: #ffffff;
   --accent-secondary: #ef4444;
   --accent-secondary-foreground: #ffffff;
-  --radius: 0.75rem;
+  --radius: 0.5rem;
 }
 
 .dark {
-  --background: #050a0e;
+  --background: #07111F;
   --foreground: #e2e8f0;
-  --card: #0c1317;
+  --card: #0c1524;
   --card-foreground: #e2e8f0;
-  --muted: #131c22;
+  --muted: #132033;
   --muted-foreground: #94a3b8;
-  --border: #1e2d38;
-  --accent: #06b6d4;
-  --accent-foreground: #ffffff;
-  --accent-secondary: #ef4444;
+  --border: #1e2e42;
+  --accent: #60a5fa;
+  --accent-foreground: #0f172a;
+  --accent-secondary: #f87171;
   --accent-secondary-foreground: #ffffff;
 }
 
 @theme inline {
+  --font-sans: 'Geist', sans-serif;
+  --font-heading: 'Cabinet Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -54,14 +60,27 @@ html {
 body {
   background-color: var(--color-background);
   color: var(--color-foreground);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  font-family: var(--font-sans);
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
 }
 
-/* Simple fade-up animation used instead of Framer Motion */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--color-foreground);
+}
+
+code, pre, .font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Base animations & ease-out definitions */
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -70,22 +89,32 @@ body {
 }
 
 .animate-fade-up {
-  animation: fade-up 0.6s ease both;
+  animation: fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.delay-1 { animation-delay: 0.1s; }
-.delay-2 { animation-delay: 0.2s; }
-.delay-3 { animation-delay: 0.3s; }
-.delay-4 { animation-delay: 0.4s; }
+.delay-1 { animation-delay: 0.08s; }
+.delay-2 { animation-delay: 0.16s; }
+.delay-3 { animation-delay: 0.24s; }
+.delay-4 { animation-delay: 0.32s; }
 
-/* Styling premium untuk konten Markdown project */
+/* Uniform premium ease-out transitions for interactive elements */
+a, button, [role="button"], .transition-all {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition-duration: 200ms !important;
+}
+
+
+
+/* Premium styling for Markdown project content */
 .markdown-content h2 {
   margin-top: 2.5rem;
   margin-bottom: 1.25rem;
-  font-size: 1.625rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-foreground);
   letter-spacing: -0.025em;
+  font-family: var(--font-heading);
 }
 .markdown-content h2:first-child {
   margin-top: 0;
@@ -93,12 +122,13 @@ body {
 .markdown-content h3 {
   margin-top: 2.25rem;
   margin-bottom: 0.75rem;
-  font-size: 1.15rem;
+  font-size: 1.125rem;
   font-weight: 600;
   color: var(--color-foreground);
-  border-left: 3px solid var(--color-accent);
+  border-left: 2px solid var(--color-accent);
   padding-left: 0.75rem;
   letter-spacing: -0.01em;
+  font-family: var(--font-heading);
 }
 .markdown-content p {
   margin-bottom: 1.25rem;
@@ -132,8 +162,8 @@ body {
   position: absolute;
   left: 0.25rem;
   top: 0.625rem;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background-color: var(--color-accent);
 }
@@ -155,23 +185,23 @@ body {
   border-radius: 0.375rem;
   font-size: 0.85em;
   color: var(--color-foreground);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-family: var(--font-mono);
 }
 
 /* Image styling */
 .markdown-content img {
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.03);
+  transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
   margin: 1.75rem 0;
   width: 100%;
   height: auto;
 }
 .markdown-content img:hover {
-  border-color: rgba(6, 182, 212, 0.3);
-  transform: scale(1.005);
-  box-shadow: 0 10px 30px rgba(6, 182, 212, 0.06);
+  border-color: rgba(96, 165, 250, 0.3);
+  transform: scale(1.002);
+  box-shadow: 0 10px 30px rgba(96, 165, 250, 0.04);
 }
 
 /* Custom dashboard metrics grid for lists inside the Result tab */
@@ -193,22 +223,23 @@ body {
   flex-direction: column;
   gap: 0.35rem;
   position: relative;
-  transition: all 0.25s ease;
+  transition: all 200ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 #project-tab-content-result ul li::before {
   display: none; /* Hide default bullets */
 }
 #project-tab-content-result ul li:hover {
-  border-color: rgba(6, 182, 212, 0.4);
+  border-color: rgba(96, 165, 250, 0.4);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.06);
+  box-shadow: 0 6px 20px rgba(96, 165, 250, 0.04);
 }
 #project-tab-content-result ul li > strong:first-child {
-  font-size: 2.25rem;
+  font-size: 2rem;
   font-weight: 800;
   color: var(--color-accent);
   line-height: 1.1;
   letter-spacing: -0.03em;
+  font-family: var(--font-heading);
 }
 #project-tab-content-result ul li > strong:first-child + text,
 #project-tab-content-result ul li {
@@ -217,3 +248,18 @@ body {
   line-height: 1.5;
 }
 
+/* Respect user motion reduction settings */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+  #vanta-bg {
+    display: none !important;
+  }
+}

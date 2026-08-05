@@ -41,19 +41,19 @@ const altHref = sameProjectOtherLang
   <header class="animate-fade-up mt-6">
     <div class="flex flex-wrap items-center gap-3">
       <h1 class="text-3xl font-bold text-foreground md:text-4xl">{title}</h1>
-      <span class="rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+      <span class="rounded border border-accent/25 bg-accent/5 px-2 py-0.5 text-xs font-mono font-semibold text-accent">
         {status}
       </span>
     </div>
     <p class="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground">{tagline}</p>
 
     <div class="mt-5 flex flex-wrap gap-4 text-sm text-muted-foreground">
-      <span><strong class="text-foreground">{label.year}:</strong> {year}</span>
+      <span><strong class="text-foreground">{label.year}:</strong> <span class="font-mono">{year}</span></span>
     </div>
 
     <div class="mt-5 flex flex-wrap gap-2">
       {techStack.map((tech) => (
-        <span class="rounded-md border border-border bg-card px-2.5 py-1 text-xs font-medium text-muted-foreground">
+        <span class="rounded border border-border/60 bg-muted/30 px-2 py-0.5 text-xs font-mono font-medium text-muted-foreground">
           {tech}
         </span>
       ))}
@@ -66,7 +66,7 @@ const altHref = sameProjectOtherLang
             href={github}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+            class="inline-flex items-center gap-2 rounded-lg border border-border/80 bg-card px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
           >
             <Icon name="github" size={16} />
             {label.viewOnGithub}
@@ -77,7 +77,7 @@ const altHref = sameProjectOtherLang
             href={demo}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-transform hover:scale-105"
+            class="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-all hover:scale-[1.01]"
           >
             <Icon name="external-link" size={16} />
             {label.liveDemo}
@@ -89,7 +89,7 @@ const altHref = sameProjectOtherLang
 
   <!-- Cover Image container (used in tabs script) -->
   {project.data.cover && (
-    <div id="project-cover-container" class="animate-fade-up mt-10 overflow-hidden rounded-2xl border border-border">
+    <div id="project-cover-container" class="animate-fade-up mt-10 overflow-hidden rounded-xl border border-border/80 shadow-sm">
       <img src={project.data.cover} alt={title} class="w-full object-cover" />
     </div>
   )}

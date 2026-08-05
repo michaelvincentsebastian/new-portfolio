@@ -23,15 +23,12 @@ const about = t(lang).about;
     <!-- Profile Picture Column -->
     <div class="col-span-12 md:col-span-5 lg:col-span-4 animate-fade-up">
       <div class="relative group mx-auto max-w-[280px] md:max-w-none">
-        <!-- Sweet glow background border -->
-        <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-accent to-accent/60 opacity-30 blur-lg transition duration-500 group-hover:opacity-45"></div>
-        
         <!-- Image wrapper -->
-        <div class="relative overflow-hidden rounded-2xl border border-border bg-card p-2 shadow-xl">
+        <div class="relative overflow-hidden rounded-xl border border-border bg-card p-1.5 shadow-sm transition-all duration-200 group-hover:border-accent/40">
           <img
             src="/images/profile-picture.webp"
             alt="Michael Vincent Sebastian Handojo"
-            class="h-full w-full object-cover rounded-xl aspect-[3/4] transition duration-500 group-hover:scale-[1.03]"
+            class="h-full w-full object-cover rounded-lg aspect-[3/4] transition duration-200 group-hover:scale-[1.01]"
             loading="lazy"
           />
         </div>
@@ -57,10 +54,10 @@ const about = t(lang).about;
       </div>
 
       <!-- Tab Contents -->
-      <div class="flex-1 w-full bg-card/25 border border-border/50 rounded-2xl p-6 md:p-8 backdrop-blur-xs min-h-[220px]">
+      <div class="flex-1 w-full bg-card/50 border border-border/80 rounded-xl p-6 md:p-8 min-h-[220px]">
         {about.paragraphs.map((paragraph, index) => (
           <div
-            class={`about-tab-content transition-opacity duration-300 ${
+            class={`about-tab-content transition-opacity duration-200 ${
               index === 0 ? "block opacity-100" : "hidden opacity-0"
             }`}
             data-content={index}

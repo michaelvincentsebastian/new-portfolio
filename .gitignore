@@ -18,6 +18,11 @@ pnpm-debug.log*
 .env.production
 .env.example
 
+# temporary reference extraction
+temp_ref/
+portfolio.zip
+
+
 # macOS-specific files
 .DS_Store
 

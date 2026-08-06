@@ -1,6 +1,6 @@
 ---
 import Sidebar from "../components/Sidebar.astro";
-import Particles from "../components/Particles";
+import Particles from "../components/Particles.astro";
 import "../styles/global.css";
 import { siteConfig } from "../data/site.js";
 
@@ -43,7 +43,7 @@ const {
   <body
     class="min-h-screen bg-background text-foreground relative overflow-x-hidden selection:bg-accent/20"
   >
-    <Particles client:only="react" />
+    <Particles />
 
     <Sidebar lang={lang} altHref={altHref} isProjectPage={isProjectPage} />
 

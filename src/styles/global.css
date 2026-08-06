@@ -259,7 +259,7 @@ a, button, [role="button"], .transition-all {
     transition-duration: 0s !important;
     transition-delay: 0s !important;
   }
-  #vanta-bg {
+  #particle-canvas {
     display: none !important;
   }
 }

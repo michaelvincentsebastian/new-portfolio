@@ -1,0 +1,276 @@
+/* Local Fonts Definition */
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('/fonts/Poppins/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype-variations'),
+       url('/fonts/Inter/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --bg-primary: #faf7f5;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #f4eee9;
+  --text-primary: #1e140f;
+  --text-secondary: #635349;
+  --text-muted: #8a7a70;
+  --accent-primary: #8b5e3c;
+  --accent-primary-hover: #734c2f;
+  --accent-secondary: #b48767;
+  --accent-soft: rgba(139, 94, 60, 0.08);
+  --accent-badge-text: #6e4629;
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-hover: rgba(255, 255, 255, 0.9);
+  --glass-border: rgba(139, 94, 60, 0.12);
+  --glass-border-hover: rgba(139, 94, 60, 0.25);
+  --border-subtle: rgba(0, 0, 0, 0.07);
+  --mesh-gradient-1: rgba(180, 135, 103, 0.12);
+  --mesh-gradient-2: rgba(239, 188, 152, 0.15);
+  --shadow-card: 0 4px 20px -2px rgba(90, 60, 40, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  --glow-accent: 0 0 25px rgba(139, 94, 60, 0.18);
+}
+
+.dark {
+  --bg-primary: #0e0e0e;
+  --bg-surface: #131313;
+  --bg-surface-elevated: #1a1614;
+  --text-primary: #ffffff;
+  --text-secondary: #d4c3b9;
+  --text-muted: #94867e;
+  --accent-primary: #efbc98;
+  --accent-primary-hover: #ffdcc4;
+  --accent-secondary: #f4bb92;
+  --accent-soft: rgba(239, 188, 152, 0.12);
+  --accent-badge-text: #efbc98;
+  --glass-bg: rgba(25, 20, 18, 0.55);
+  --glass-bg-hover: rgba(35, 28, 25, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-border-hover: rgba(239, 188, 152, 0.3);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --mesh-gradient-1: rgba(42, 27, 18, 0.45);
+  --mesh-gradient-2: rgba(25, 20, 18, 0.6);
+  --shadow-card: 0 4px 24px -2px rgba(0, 0, 0, 0.4);
+  --glow-accent: 0 0 25px rgba(239, 188, 152, 0.25);
+}
+
+@theme inline {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Poppins', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --color-mocha-bg: var(--bg-primary);
+  --color-mocha-surface: var(--bg-surface);
+  --color-mocha-elevated: var(--bg-surface-elevated);
+  --color-mocha-text: var(--text-primary);
+  --color-mocha-secondary: var(--text-secondary);
+  --color-mocha-muted: var(--text-muted);
+  --color-mocha-accent: var(--accent-primary);
+  --color-mocha-accent-hover: var(--accent-primary-hover);
+  --color-mocha-soft: var(--accent-soft);
+  --color-mocha-glass: var(--glass-bg);
+  --color-mocha-border: var(--glass-border);
+  --color-mocha-subtle: var(--border-subtle);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings with Poppins Bold */
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Mesh Background Gradient - Hardware Accelerated */
+.mesh-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  background-image: 
+    radial-gradient(circle at 15% 30%, var(--mesh-gradient-1) 0%, transparent 50%),
+    radial-gradient(circle at 85% 65%, var(--mesh-gradient-2) 0%, transparent 50%),
+    radial-gradient(circle at 50% -10%, var(--mesh-gradient-1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* High-performance Glassmorphism Styles */
+.mocha-glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-card);
+  transform: translateZ(0);
+}
+
+.mocha-glass-interactive {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-card);
+  transform: translateZ(0);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mocha-glass-interactive:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  transform: translateY(-2px) translateZ(0);
+  box-shadow: var(--shadow-card), var(--glow-accent);
+}
+
+.mocha-modal {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+  transform: translateZ(0);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(239, 188, 152, 0.4);
+}
+
+:root:not(.dark) .text-glow {
+  text-shadow: 0 0 20px rgba(139, 94, 60, 0.2);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--glass-border);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* Markdown typography styling */
+.markdown-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 0.35rem;
+}
+
+.markdown-content h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent-primary);
+}
+
+.markdown-content p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.markdown-content ul, .markdown-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 1.25rem;
+  list-style-type: disc;
+  color: var(--text-secondary);
+}
+
+.markdown-content li {
+  margin-bottom: 0.4rem;
+  line-height: 1.6;
+}
+
+.markdown-content strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.markdown-content code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--accent-soft);
+  color: var(--accent-primary);
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.35rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}

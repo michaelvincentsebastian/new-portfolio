@@ -10,7 +10,7 @@ interface MobileNavProps {
 }
 
 export default function MobileNav({ lang, isProjectPage = false, altHref }: MobileNavProps) {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   const otherLang = lang === 'en' ? 'id' : 'en';

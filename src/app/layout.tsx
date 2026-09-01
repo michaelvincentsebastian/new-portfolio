@@ -42,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
+    <html lang="id" className={`${inter.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -50,10 +50,10 @@ export default function RootLayout({
               (function() {
                 try {
                   var storedTheme = localStorage.getItem('theme');
-                  if (storedTheme === 'light') {
-                    document.documentElement.classList.remove('dark');
-                  } else {
+                  if (storedTheme === 'dark') {
                     document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
                   }
                 } catch (e) {}
               })();

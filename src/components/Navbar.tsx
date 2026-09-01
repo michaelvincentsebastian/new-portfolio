@@ -11,7 +11,7 @@ interface NavbarProps {
 }
 
 export default function Navbar({ lang, isProjectPage = false, altHref }: NavbarProps) {
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
   const nav = t(lang).nav;

@@ -48,7 +48,7 @@ export default function ContactSection({ lang }: ContactSectionProps) {
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 border-t border-[var(--glass-border)]">
+    <section id="contact" className="py-20 md:py-28 border-t border-[var(--glass-border)] section-optimize">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-14">
         <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">

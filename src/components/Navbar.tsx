@@ -80,6 +80,9 @@ export default function Navbar({ lang, isProjectPage = false, altHref }: NavbarP
         <img
           src="/favicon.svg"
           alt="Logo"
+          width={32}
+          height={32}
+          decoding="async"
           className="h-8 w-8 object-contain transition-transform duration-300 ease-out group-hover:scale-110 group-active:scale-95"
         />
       </a>

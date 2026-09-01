@@ -1,6 +1,5 @@
-'use client';
-
 import React from 'react';
+import Image from 'next/image';
 import Icon from './Icon';
 import { ProjectItem } from '@/lib/content';
 import { t } from '@/lib/data/i18n';
@@ -43,14 +42,14 @@ export default function ProjectCard({ project, lang }: ProjectCardProps) {
       <div>
         {/* Cover image if present */}
         {data.cover ? (
-          <div className="aspect-16/9 w-full overflow-hidden bg-[var(--bg-surface-elevated)] relative border-b border-[var(--glass-border)]">
-            <img
+          <div className="aspect-video w-full overflow-hidden bg-[var(--bg-surface-elevated)] relative border-b border-[var(--glass-border)]">
+            <Image
               src={data.cover}
               alt={data.title}
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-              onError={(e) => {
-                (e.currentTarget as HTMLElement).style.display = 'none';
-              }}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+              loading="lazy"
+              className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
             />
             {/* Category tag overlay on image */}
             {data.category && (

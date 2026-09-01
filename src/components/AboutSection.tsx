@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { t } from '@/lib/data/i18n';
 
 interface AboutSectionProps {
@@ -12,7 +13,7 @@ export default function AboutSection({ lang }: AboutSectionProps) {
   const about = t(lang).about;
 
   return (
-    <section id="about" className="py-20 md:py-28 border-t border-[var(--glass-border)]">
+    <section id="about" className="py-20 md:py-28 border-t border-[var(--glass-border)] section-optimize">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-14">
         <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
@@ -28,9 +29,12 @@ export default function AboutSection({ lang }: AboutSectionProps) {
           <div className="relative w-full max-w-xs">
             <div className="relative rounded-3xl mocha-glass p-4 overflow-hidden group">
               <div className="aspect-square w-full rounded-2xl overflow-hidden bg-[var(--bg-surface-elevated)] relative">
-                <img
+                <Image
                   src="/images/profile-picture.webp"
                   alt="Michael Vincent"
+                  width={320}
+                  height={320}
+                  sizes="(max-width: 768px) 280px, 320px"
                   className="w-full h-full object-cover grayscale contrast-105 group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
                 />
               </div>

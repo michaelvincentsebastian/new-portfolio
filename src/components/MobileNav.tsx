@@ -78,6 +78,9 @@ export default function MobileNav({ lang, isProjectPage = false, altHref }: Mobi
           <img
             src="/favicon.svg"
             alt="Logo"
+            width={28}
+            height={28}
+            decoding="async"
             className="h-7 w-7 object-contain transition-transform duration-300 ease-out group-hover:scale-110 group-active:scale-95"
           />
         </a>

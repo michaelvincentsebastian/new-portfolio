@@ -1,10 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import Icon from './Icon';
-import LocationModal from './LocationModal';
 import { t } from '@/lib/data/i18n';
 import { socialLinks } from '@/lib/data/site';
+
+const LocationModal = dynamic(() => import('./LocationModal'), {
+  ssr: false,
+});
 
 interface HomeSectionProps {
   lang: string;
@@ -93,12 +97,14 @@ export default function HomeSection({ lang }: HomeSectionProps) {
       </div>
 
       {/* Location Modal */}
-      <LocationModal
-        isOpen={isLocationModalOpen}
-        title={home.locationTitle}
-        detail={home.locationDetail}
-        onClose={() => setIsLocationModalOpen(false)}
-      />
+      {isLocationModalOpen && (
+        <LocationModal
+          isOpen={isLocationModalOpen}
+          title={home.locationTitle}
+          detail={home.locationDetail}
+          onClose={() => setIsLocationModalOpen(false)}
+        />
+      )}
     </section>
   );
 }

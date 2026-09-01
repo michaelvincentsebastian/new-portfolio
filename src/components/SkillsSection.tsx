@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { t } from '@/lib/data/i18n';
 import { skillsData } from '@/lib/data/skills';
@@ -12,7 +10,7 @@ export default function SkillsSection({ lang }: SkillsSectionProps) {
   const skills = t(lang).skills;
 
   return (
-    <section id="skills" className="py-20 md:py-28 border-t border-[var(--glass-border)]">
+    <section id="skills" className="py-20 md:py-28 border-t border-[var(--glass-border)] section-optimize">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-14">
         <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
@@ -56,11 +54,12 @@ export default function SkillsSection({ lang }: SkillsSectionProps) {
                       {item.icon && (
                         <img
                           src={item.icon}
-                          alt={item.name}
-                          className="h-4 w-4 object-contain"
-                          onError={(e) => {
-                            (e.currentTarget as HTMLElement).style.display = 'none';
-                          }}
+                          alt=""
+                          width={16}
+                          height={16}
+                          loading="lazy"
+                          decoding="async"
+                          className="h-4 w-4 object-contain shrink-0"
                         />
                       )}
                       <span>{item.name}</span>

@@ -22,8 +22,10 @@ export default function ProjectsSection({ projects, lang }: ProjectsSectionProps
 
   const label = t(lang).projects;
 
-  // Close dropdowns on outside click or Escape key
+  // Close dropdowns on outside click or Escape key (only when a dropdown is open)
   useEffect(() => {
+    if (!isFieldOpen && !isScopeOpen) return;
+
     function handleClickOutside(event: MouseEvent) {
       if (
         fieldDropdownRef.current &&
@@ -52,7 +54,7 @@ export default function ProjectsSection({ projects, lang }: ProjectsSectionProps
       document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [isFieldOpen, isScopeOpen]);
 
   // 1. Extract all unique fields/categories
   const fields = useMemo(() => {
@@ -119,7 +121,7 @@ export default function ProjectsSection({ projects, lang }: ProjectsSectionProps
   const isFiltered = selectedField !== 'ALL' || selectedScope !== 'ALL';
 
   return (
-    <section id="projects" className="py-20 md:py-28 border-t border-[var(--glass-border)] relative">
+    <section id="projects" className="py-20 md:py-28 border-t border-[var(--glass-border)] relative section-optimize">
       {/* Section Header */}
       <div className="text-center max-w-3xl mx-auto mb-10">
         <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">

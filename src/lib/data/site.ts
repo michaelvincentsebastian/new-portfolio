@@ -10,7 +10,7 @@ export interface SocialLink {
 
 export const siteConfig = {
   name: "Michael Vincent Sebastian Handojo",
-  siteTitle: "Vincent — Analytics Engineer Intern",
+  siteTitle: "Michael Vincent Sebastian Handojo's Portfolio",
   siteDescription:
     "Portfolio of Michael Vincent, an Analytics Engineer Intern building pipelines and data-driven products.",
   siteUrl: "https://michaelvincentsebastianhandojo.vercel.app/",

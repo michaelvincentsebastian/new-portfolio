@@ -26,7 +26,10 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: siteConfig.siteTitle,
+  title: {
+    default: siteConfig.siteTitle,
+    template: `%s | ${siteConfig.siteTitle}`,
+  },
   description: siteConfig.siteDescription,
   icons: {
     icon: '/favicon.svg',

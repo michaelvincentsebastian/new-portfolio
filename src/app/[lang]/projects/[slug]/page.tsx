@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import MobileNav from '@/components/MobileNav';
@@ -26,6 +27,16 @@ interface ProjectPageProps {
     lang: string;
     slug: string;
   }>;
+}
+
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+  const { lang, slug } = await params;
+  const project = getProjectBySlug(slug, lang);
+  if (!project) return { title: 'Project Not Found' };
+  return {
+    title: project.data.title,
+    description: project.data.tagline,
+  };
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
